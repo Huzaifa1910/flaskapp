@@ -1,6 +1,6 @@
-- name: Set up SSH
-  run: |
-    mkdir -p ~/.ssh
-    echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-    ssh-keyscan -H 20.75.90.219 >> ~/.ssh/known_hosts
+name: Set up SSH
+run: |
+  mkdir -p ~/.ssh
+  echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+  chmod 600 ~/.ssh/id_rsa
+  ssh-keyscan -H 20.75.90.219 >> ~/.ssh/known_hosts
