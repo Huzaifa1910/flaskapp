@@ -8,7 +8,7 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    return jsonify({"message": "Welcome to the Flask API!"})
+    return jsonify({"message": "Automatically updated from ci/cd"})
 
  
 
