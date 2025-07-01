@@ -1,0 +1,37 @@
+name: CI/CD Deploy to Azure VM
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup SSH key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+    - name: SSH & Deploy Code
+      run: |
+        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+          # Navigate or clone repo
+          cd ~/flaskapp || git clone https://github.com/huzaifa1910/flaskapp.git ~/flaskapp && cd ~/flaskapp
+
+          # Pull latest changes
+          git pull origin main
+
+          # Setup venv
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+          # Restart app (kill existing, restart via start.sh)
+          pkill -f "flask run" || true
+          nohup bash start.sh &
+        EOF
