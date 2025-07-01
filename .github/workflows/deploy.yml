@@ -18,4 +18,4 @@ jobs:
 
     - name: Test SSH connection
       run: |
-        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} "echo ✅ SSH connection successful"
+        ssh -i ~/.ssh/id_rsa azurevmtmc@20.75.90.219 "echo ✅ SSH connection successful"
