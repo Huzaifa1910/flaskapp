@@ -17,8 +17,8 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H 20.75.90.219 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 20.246.57.254 >> ~/.ssh/known_hosts
 
     - name: Deploy via SSH
       run: |
-        ssh -i ~/.ssh/id_rsa azurevmtmc@20.75.90.219 "echo ✅ SSH connection successful && cd flaskapp && git pull && pm2 restart all"
+        ssh -i ~/.ssh/id_rsa azureuser@20.246.57.254 "echo ✅ SSH connection successful && cd flaskapp && git pull && pm2 restart all"
