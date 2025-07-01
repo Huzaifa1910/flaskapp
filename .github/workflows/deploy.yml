@@ -18,7 +18,7 @@ jobs:
 
     - name: SSH & Deploy Code
       run: |
-        ssh -i ~/.ssh/id_rsa ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
+        ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} << 'EOF'
           # Navigate or clone repo
           cd ~/flaskapp || git clone https://github.com/huzaifa1910/flaskapp.git ~/flaskapp && cd ~/flaskapp
 
